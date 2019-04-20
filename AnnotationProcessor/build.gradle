@@ -1,0 +1,24 @@
+import org.gradle.internal.jvm.Jvm
+
+apply plugin: 'java-library'
+
+dependencies {
+    implementation fileTree(dir: 'libs', include: ['*.jar'])
+
+    // 刚才定义的 Annotation 模块
+    implementation project(":Annotation")
+
+    // 谷歌的 AutoService 可以让我们的注解处理器自动注册上
+    implementation 'com.google.auto.service:auto-service:1.0-rc4'
+
+    // 用于生成新的类、函数
+    implementation "com.squareup:javapoet:1.9.0"
+
+    // 谷歌的一个工具类库
+    implementation "com.google.guava:guava:24.1-jre"
+
+    implementation files(Jvm.current().toolsJar)
+}
+
+sourceCompatibility = "1.8"
+targetCompatibility = "1.8"
